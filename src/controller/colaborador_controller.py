@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from src.model.colaborador_model import Colaborador
 from src.model import db
 from src.security.security import hash_senha, checar_senha
+from flasgger import swag_from
 
 bp_colaborador = Blueprint('colaborador', __name__, url_prefix='/colaborador')
 
@@ -28,8 +29,8 @@ def pegar_dados_todos_colaboradores():
 # TAREFA -> VALIDAÇÃO DO CAMPO CRACHA. NÃO PODEMOS TER DUPLICATAS
 
 @bp_colaborador.route('/cadastrar', methods=['POST'])
+@swag_from('../docs/colaborador/cadastrar.yml')
 def cadastrar_colaborador():
-    
     dados_requisicao = request.get_json()
     
     novo_colaborador = Colaborador(
