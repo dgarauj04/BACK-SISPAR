@@ -34,7 +34,7 @@ def test_desempenho_requisicao_post(client):
     comeco = time.time() #100
     
     colaborador = {
-        'nome': 'teste josé',
+        'nome': 'teste name',
         'email': 'teste@teste.com',
         'senha': '12345',
         'cargo': 'cargo teste',
