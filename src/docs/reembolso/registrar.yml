@@ -1,0 +1,75 @@
+tags:
+  - Reembolso
+summary: Solicitar um novo reembolso
+description: Endpoint para registrar uma nova solicitação de reembolso.
+parameters:
+  - in: body
+    name: corpo
+    required: true
+    schema:
+      type: object
+      properties:
+        colaborador:
+          type: string
+          required: true
+          example: "Douglas Araujo"
+        empresa:
+          type: string
+          required: true
+          example: "DgCompany"
+        nPrestacao:
+          type: integer
+          required: true
+          example: 42
+        descricao:
+          type: string
+          example: "Viagem para representar a empresa em uma palestra de negócios"
+        data:
+          type: string
+          format: date
+          example: "2025-05-15"
+        tipoReembolso:
+          type: string
+          required: true
+          example: "Eventos de representação"
+        centroCusto:
+          type: string
+          required: true
+          example: "1100109002"
+        ordemInterna:
+          type: string
+          example: "19"
+        divisao:
+          type: string
+          example: "21"
+        pep:
+          type: string
+          example: "005"
+        moeda:
+          type: string
+          required: true
+          example: "FLA"
+        distanciaKm:
+          type: number
+          example: 22
+        valorKm:
+          type: number
+          example: 8.1
+        valorFaturado:
+          type: number
+          required: true
+          example: 2019
+        despesa:
+          type: number
+          example: 200
+        status:
+          type: string
+          default: "Em análise"
+          example: "Aprovado"
+responses:
+  201:
+    description: Reembolso solicitado com sucesso.
+  400:
+    description: Erro nos dados enviados.
+  404:
+    description: Nenhum colaborador cadastrado.

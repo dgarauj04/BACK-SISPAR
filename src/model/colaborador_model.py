@@ -34,6 +34,8 @@ class Colaborador(db.Model): #db.Model serve para criar a tabela
         return {
             'id': self.id,
             'nome': self.nome,
+            'email': self.email,
+            'senha': self.senha,
             'cargo': self.cargo,
             'salario': self.salario
         }

@@ -8,7 +8,6 @@ class Reembolso(db.Model):
     __tablename__ = 'tb_reembolso' #nome da tabela
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    id_colaborador = Column(Integer, ForeignKey('tb_colaborador.id'), nullable=False)
     colaborador = Column(String(200), nullable=False)
     empresa = Column(String(50), nullable=False)
     num_prestacao = Column(Integer, nullable=False)
@@ -26,9 +25,8 @@ class Reembolso(db.Model):
     despesa = Column(DECIMAL(10,2))
     status = Column(String(30), nullable=False) 
 
-    def __init__(self, id_colaborador, colaborador, empresa, num_prestacao, descricao, data, tipo_reembolso, centro_custo, ordem_interna, divisao, pep, moeda, distancia_km, valor_km, valor_faturado, despesa, status='Em analise'):
+    def __init__(self, colaborador, empresa, num_prestacao, descricao, data, tipo_reembolso, centro_custo, ordem_interna, divisao, pep, moeda, distancia_km, valor_km, valor_faturado, despesa, status='Em analise'):
         
-        self.id_colaborador = id_colaborador
         self.colaborador = colaborador
         self.empresa = empresa
         self.num_prestacao = num_prestacao

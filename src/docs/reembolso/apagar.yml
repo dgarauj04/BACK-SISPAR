@@ -1,0 +1,15 @@
+tags:
+  - Reembolso
+summary: Deletar um reembolso
+description: Endpoint para remover permanentemente um reembolso.
+parameters:
+  - in: path
+    name: id_reembolso
+    required: true
+    type: integer
+    description: ID do reembolso a ser deletado
+responses:
+  200:
+    description: Reembolso deletado com sucesso.
+  404:
+    description: Reembolso não encontrado!

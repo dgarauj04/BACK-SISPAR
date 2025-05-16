@@ -5,6 +5,6 @@ from dotenv import load_dotenv #Traz a funçõa para carregar as variaveis de am
 load_dotenv()
 
 class Config():
-    SQLALCHEMY_DATABASE_URI = environ.get('URL_DATABASE_DEV') #Pega a variavel de ambiente e atribui a ela a variavel SQLALCHEMY_DATABASE_URI
+    SQLALCHEMY_DATABASE_URI = "mysql://root:deges@localhost:3306/bd_sispar" #Pega a variavel de ambiente e atribui a ela a variavel SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False #Otimiza o acesso ao banco de dados 
     print("URL DO BANCO:", environ.get('URL_DATABASE_DEV'))

@@ -16,6 +16,7 @@ dados = [
 
 #GET busca informações no servidor
 @bp_colaborador.route('/todos-colaboradores', methods=['GET'])
+@swag_from('../docs/colaborador/todos_colaboradores.yml')
 def pegar_dados_colaboradores():
     
     colaboradores = db.session.execute(
@@ -24,7 +25,13 @@ def pegar_dados_colaboradores():
         
     colaboradores = [ colaborador.all_data() for colaborador in colaboradores ]
     
-    return jsonify(colaboradores), 200
+    if not colaboradores:
+        return jsonify({'mensagem': 'Não há colaboradores cadastrados'}), 404
+  
+    if colaboradores:
+       return jsonify(colaboradores, {'mensagem': 'Colaboradores retornados com sucesso!'}), 200
+
+   
 
 #POST insere informações no servidor
 @bp_colaborador.route('/cadastrar', methods=['POST'])
@@ -49,6 +56,7 @@ def cadastrar_colaborador():
 
 #POST insere informações no servidor
 @bp_colaborador.route('/login', methods=['POST'])
+@swag_from('../docs/colaborador/login.yml')
 def login():
     
     dados_request = request.get_json()
@@ -71,11 +79,11 @@ def login():
 
 #PUT atualiza informações no servidor
 @bp_colaborador.route('/atualizar/<int:id_colaborador>', methods=['PUT'])
+@swag_from('../docs/colaborador/atualizar_colaborador.yml')
 def atualizar_dados_colaborador(id_colaborador):
     
     dados_colaborador = request.get_json()
     
-     #Busca colaborador no banco de dados
     colaborador = db.session.execute(
         db.select(Colaborador).where(Colaborador.id == id_colaborador)
     ).scalar()
@@ -83,8 +91,6 @@ def atualizar_dados_colaborador(id_colaborador):
     if not colaborador:
         return jsonify({'mensagem': 'Colaborador nao encontrado'}), 404
     
-    
- # Atualiza os campos recebidos no JSON
     if 'nome' in dados_colaborador:
         colaborador.nome = dados_colaborador['nome']
     if 'cargo' in dados_colaborador:
@@ -98,25 +104,22 @@ def atualizar_dados_colaborador(id_colaborador):
     if 'salario' in dados_colaborador:
         colaborador.salario = dados_colaborador['salario']
 
-    # Commit das alterações no banco
     db.session.commit()
    
 
     return jsonify( {'mensagem': 'Dados do colaborador atualizados com sucesso!'}), 200
 
-# DELETE remove colaborador do servidor
+#DELETE remove colaborador do servidor
 @bp_colaborador.route('/deletar/<int:id_colaborador>', methods=['DELETE'])
+@swag_from('../docs/colaborador/deletar.yml')
 def deletar_colaborador(id_colaborador):
-    # Busca o colaborador no banco
     colaborador = db.session.execute(
         db.select(Colaborador).where(Colaborador.id == id_colaborador)
     ).scalar()
 
-    #Se não encontrar, retorna erro
     if not colaborador:
         return jsonify({'mensagem': 'Colaborador não encontrado!'}), 404
 
-    #Remove o colaborador
     db.session.delete(colaborador)
     db.session.commit()
 

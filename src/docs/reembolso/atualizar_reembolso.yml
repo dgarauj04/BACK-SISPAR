@@ -1,0 +1,56 @@
+tags:
+  - Reembolso
+summary: Atualizar dados de um reembolso
+description: Endpoint para atualizar os dados de um reembolso existente.
+parameters:
+  - in: path
+    name: id_reembolso
+    required: true
+    type: integer
+    description: ID do reembolso a ser atualizado
+  - in: body
+    name: corpo
+    required: true
+    schema:
+      type: object
+      properties:
+        colaborador:
+          type: string
+        empresa:
+          type: string
+        nPrestacao:
+          type: integer
+        motivo:
+          type: string
+        tipoReembolso:
+          type: string
+        data:
+          type: string
+          format: date
+        centroCusto:
+          type: string
+        ordemInterna:
+          type: number
+        divisao:
+          type: string
+        pep:
+          type: string
+        distanciaKm:
+          type: number
+        valorKm:
+          type: number
+        valorFaturado:
+          type: number
+        despesa:
+          type: number
+        status:
+          type: string
+        moeda:
+          type: string
+responses:
+  200:
+    description: Reembolso atualizado com sucesso.
+  400:
+    description: Erro nos dados enviados.
+  404:
+    description: Reembolso não encontrado.
