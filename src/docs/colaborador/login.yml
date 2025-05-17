@@ -1,0 +1,27 @@
+tags:
+  - Colaborador
+summary: Realizar login de um colaborador
+description: Endpoint para realizar login de um colaborador.
+parameters:
+  - in: body
+    name: corpo
+    required: true
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+          example: samukatigrao@gmail.com
+        senha:
+          type: string
+          example: 100senha
+      required:
+        - email
+        - senha
+responses:
+  200:
+    description: Login realizado com sucesso.
+  401:
+    description: Credenciais inválidas.
+  400:
+    description: Erro nos dados enviados.

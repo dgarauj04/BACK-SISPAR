@@ -1,0 +1,40 @@
+tags:
+  - Colaborador
+summary: Cadastrar um novo colaborador
+description: Endpoint para cadastrar um novo colaborador.
+parameters:
+  - in: body
+    name: corpo
+    required: true
+    schema:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: Mikaela Araujo
+        email:
+          type: string
+          example: mikaeladev@gmail.com
+        senha:
+          type: string
+          example: senha248
+        cargo:
+          type: string
+          example: Desenvolvedora
+        salario:
+          type: number
+          example: 8500.75
+        cracha:
+          type: string
+          example: MA12365
+      required:
+        - nome
+        - email
+        - senha
+        - cargo
+        - salario
+responses:
+  201:
+    description: Colaborador cadastrado com sucesso.
+  400:
+    description: Erro nos dados enviados.

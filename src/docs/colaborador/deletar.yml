@@ -1,0 +1,16 @@
+tags:
+  - Colaborador
+summary: Remover um colaborador
+description: Endpoint para remover um colaborador.
+parameters:
+  - in: path
+    name: id_colaborador
+    required: true
+    schema:
+    type: integer
+    description: ID do colaborador
+responses:
+  204:
+    description: Colaborador removido com sucesso.
+  404:
+    description: Colaborador não encontrado.

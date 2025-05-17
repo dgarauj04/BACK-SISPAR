@@ -1,0 +1,49 @@
+tags:
+  - Colaborador
+summary: Obter todos os colaboradores  
+description: Endpoint para listar todos os colaboradores cadastrados.
+responses:
+  200:
+    description: Lista de colaboradores retornada com sucesso.
+    schema:
+      type: object
+      properties:
+        colaboradores:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              nome:
+                type: string
+                example: "Douglas Araujo"
+              email:
+                type: string
+                format: email
+                example: "deges@gmal.com"
+              senha:
+                type: string
+                description: "Senha criptografada"
+                example: "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGgaXNlK"
+              cargo:
+                type: string
+                example: "Desenvolvedor Full Stack Jr."
+              salario:
+                type: number
+                format: float
+                example: 9000.00
+              cracha:
+                type: string
+                example: "DG81219"
+      200:       
+       description: "Colaboradores retornados com sucesso!"
+      404:
+       description: Nenhum colaborador encontrado.
+    schema:
+      type: object
+      properties:
+        mensagem:
+          type: string
+          example: "Não há colaboradores cadastrados"
