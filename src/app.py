@@ -33,9 +33,8 @@ def create_app():
     app.config.from_object(Config) #Configuração do ambiente de desenvolvimento
     
     db.init_app(app) #Inicia a conexão com o banco de dados
-#Instancia o Swagger e adiciona as configurações
     with app.app_context():
-        db.create_all() #Code que Cria as tabelas caso elas não existam
+        db.create_all() 
     Swagger(app, config=swagger_config)
     
     return app
