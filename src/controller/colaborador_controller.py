@@ -47,11 +47,16 @@ def cadastrar_colaborador():
         salario=dados_request['salario'],
         cracha=dados_request['cracha']
     )
-
+    
+    campos_obrigatorios = ['nome', 'email', 'senha', 'cargo', 'salario', 'cracha']
+    for campo in campos_obrigatorios:
+        if campo not in dados_request or not dados_request[campo]:
+            return jsonify({'mensagem': f'O campo {campo} é obrigatório!'}), 400
+    
     db.session.add(novo_colaborador) 
     db.session.commit() 
     
-    return jsonify( {'mensagem': 'Colaborador cadastrado com sucesso!'} ), 201
+    return jsonify({'mensagem': 'Colaborador cadastrado com sucesso!'}), 201
 
 
 #POST insere informações no servidor
