@@ -26,7 +26,7 @@ swagger_config = {
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, origins='*') #Ativa o CORS para todas as rotas da API
+    CORS(app, origins=['https://sispar-vnwb.vercel.app']) #Ativa o CORS para todas as rotas da API
     app.register_blueprint(bp_colaborador)
     app.register_blueprint(bp_reembolso)
     
