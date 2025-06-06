@@ -1,0 +1,44 @@
+tags:
+  - Colaborador
+summary: Obter colaborador por ID
+description: Endpoint para retornar um colaborador específico pelo ID.
+parameters:
+  - name: id_colaborador
+    in: path
+    required: true
+    description: ID do colaborador
+    type: integer
+responses:
+  200:
+    description: Colaborador retornado com sucesso.
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nome:
+          type: string
+          example: "Douglas Araujo"
+        email:
+          type: string
+          format: email
+          example: "douglas@gmail.com"
+        cargo:
+          type: string
+          example: "Desenvolvedor Full Stack Jr."
+        salario:
+          type: number
+          format: float
+          example: 9000.00
+        cracha:
+          type: string
+          example: "DG81219"
+  404:
+    description: Colaborador não encontrado.
+    schema:
+      type: object
+      properties:
+        mensagem:
+          type: string
+          example: "Colaborador não encontrado!"

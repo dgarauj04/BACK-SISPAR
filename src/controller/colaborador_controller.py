@@ -30,6 +30,22 @@ def pegar_dados_colaboradores():
   
     if colaboradores:
        return jsonify(colaboradores, {'mensagem': 'Colaboradores retornados com sucesso!'}), 200
+   
+   
+
+#GET busca colaborador pelo ID
+@bp_colaborador.route('/buscar/<int:id_colaborador>', methods=['GET'])
+@swag_from('../docs/colaborador/buscar_colaborador.yml')
+def pegar_colaborador_por_id(id_colaborador):
+    
+    colaborador = db.session.execute(
+        db.select(Colaborador).where(Colaborador.id == id_colaborador)
+    ).scalar()
+
+    if not colaborador:
+        return jsonify({'mensagem': 'Colaborador não encontrado!'}), 404
+
+    return jsonify(colaborador.all_data(), {'mensagem': 'Colaborador encontrado com sucesso!'}), 200
 
    
 
