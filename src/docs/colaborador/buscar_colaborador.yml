@@ -19,11 +19,11 @@ responses:
           example: 1
         nome:
           type: string
-          example: "Douglas Araujo"
+          example: "Nome Sobrenome"
         email:
           type: string
           format: email
-          example: "douglas@gmail.com"
+          example: "usuario@gmail.com"
         cargo:
           type: string
           example: "Desenvolvedor Full Stack Jr."
@@ -33,7 +33,7 @@ responses:
           example: 9000.00
         cracha:
           type: string
-          example: "DG81219"
+          example: "NS81219"
   404:
     description: Colaborador não encontrado.
     schema:
