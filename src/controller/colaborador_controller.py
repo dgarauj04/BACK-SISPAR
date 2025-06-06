@@ -63,25 +63,30 @@ def cadastrar_colaborador():
 @bp_colaborador.route('/login', methods=['POST'])
 @swag_from('../docs/colaborador/login.yml')
 def login():
+    try:
+        dados_request = request.get_json()
+        email = dados_request.get('email')
+        senha = dados_request.get('senha')
+        
+        if not email or not senha:
+            return jsonify({'mensagem': 'Todos os campos devem ser preenchidos!'}), 400
+        
+        colaborador = db.session.execute(
+            db.select(Colaborador).where(Colaborador.email == email)).scalar()
+        
+        if not colaborador:
+            return jsonify({'mensagem': 'O usuário não foi encontrado!'}), 404
+        
+        colaborador = colaborador.to_dict()
+        
+        if checar_senha(senha, colaborador.get('senha')):
+            return jsonify({'mensagem': 'Login realizado com sucesso!'}), 200
+        else:
+            return jsonify({'mensagem': 'Senha incorreta!'}), 401
     
-    dados_request = request.get_json()
-    email = dados_request.get('email')
-    senha = dados_request.get('senha')
-    
-    if not email or not senha:
-        return jsonify({'mensagem': 'Todos os campos devem ser preenchidos!'}), 400
-     
-    colaborador = db.session.execute(
-        db.select(Colaborador).where(Colaborador.email == email)).scalar() 
-    
-    if not colaborador:
-        return jsonify({'mensagem': 'O usuário não foi encontrado!'}), 404
-    
-    colaborador = colaborador.to_dict()    
-    
-    if colaborador.get('email') == email and checar_senha(senha, colaborador.get('senha')):
-        return jsonify({'mensagem': 'Login realizado com sucesso!'}), 200
-
+    except Exception as e:
+        return jsonify({'mensagem': f'Erro no login: {str(e)}'}), 500
+        
 #PUT atualiza informações no servidor
 @bp_colaborador.route('/atualizar/<int:id_colaborador>', methods=['PUT'])
 @swag_from('../docs/colaborador/atualizar_colaborador.yml')
