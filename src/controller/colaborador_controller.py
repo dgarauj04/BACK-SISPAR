@@ -96,7 +96,10 @@ def login():
         colaborador = colaborador.to_dict()
         
         if checar_senha(senha, colaborador.get('senha')):
-            return jsonify({'mensagem': 'Login realizado com sucesso!'}), 200
+           colaborador_data = db.session.execute(
+               db.select(Colaborador).where(Colaborador.email == email)).scalar().all_data()
+           return jsonify(colaborador_data), 200
+
         else:
             return jsonify({'mensagem': 'Senha incorreta!'}), 401
     
